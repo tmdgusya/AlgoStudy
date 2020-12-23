@@ -1,6 +1,6 @@
 package BackjunJudge;
 
-public class Memoization{
+public class Fibonacci{
     static int[] d = new int[100];
     
     static int fibonacci(int x){

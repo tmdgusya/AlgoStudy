@@ -49,6 +49,7 @@ public class Back2178 {
                         q.offer(new int[]{r, c});
                         visited[r][c] = true;
                         miro[r][c] = miro[location[0]][location[1]] + 1;
+
                     }
                 }
             }

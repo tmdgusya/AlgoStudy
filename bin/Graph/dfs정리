@@ -1,0 +1,63 @@
+길찾기에서는 dfs 를 쓸 수 없는데, 그 이유는 일단 헤멜수 있기때문이다. 만약에 4분위 디렉션에서 계속 한가지 길로들어가게되면
+헤메게 될 확률도 높기때문에, bfs 로 한가지씩 검증하고 가는것이 맞다.
+
+bfs 에서 만약에 위치 다이렉션을 4분위로만 가야한다면 아래처럼
+
+    static int[] dx = {0,-1,0,1};
+    static int[] dy = {-1,0,1,0};
+
+만약 8분위라면
+
+ind dx[] = {0,-1,-1,-1,0,1,1,1}
+int dy[] = {-1,-1,0,1,1,1,0,-1}   
+
+
+-----
+
+Case
+
+4 6
+101111
+101010
+101011
+111011
+
+-----
+
+일단 bfs로 길찾는 로직에서 중요한일은 위처럼 direction 을 몇가지를 가질 수 있느냐를 먼져 판단한다.
+
+그 후 direction 을 정해준뒤
+
+해당 direction 마다 한번씩 방문한다. 그리고 방문하지 않았다면 그 노드를 방문한다.
+
+해당과정은 큐로 이루어져있으므로, 먼져들어간애가 먼져나오는 구조이다.
+
+그러면 백준 미로찾기 문제를 통해서 한번 검증해보자!
+
+-----
+
+사용할 필드 miro[x][y] => 미로 주어진 방을 그대로 넣을 수 있게 해주는것
+visited[x][y] => 해당 노드를 방문하였는지를 알수있도록 표기하는 것 
+
+location[2] 는 위치저장용
+
+Queue<int[]> q = new LinkedList<>();
+q.offer(new int[]{index1, index2});
+
+while(q.isEmpty()){
+	int location[] = q.poll();
+	visited[index1][index2] = true;
+	for(int dir = 0; dir < 4; dir++){
+		int x_ = location[0] + dx[dir]; // x 축에서 이동하는 정보들
+		int y_ = location[1] + dy[dir]; // y 축 ``
+		if(x_ >= 0 && x_ < x && y_ >= 0 &&  y+ < y){
+			if(miro[x_][y_] != 0 && !visited[r][c]){
+				q.offer(new int[]{r,c});
+				visited[r][c] = true;
+				miro[r][c] = miro[location[0]][location[1]] + 1;
+			}
+		}
+	}
+}
+
+Queue 에 쌓이는 구조를 분석해보면, 

@@ -7,13 +7,11 @@ import java.io.InputStreamReader;
 public class Back7568 {
 
     static class Person implements Comparable<Person> {
-        int id;
         int weight;
         int tall;
         int rank;
 
-        public Person(int id, int weight, int tall) {
-            this.id = id;
+        public Person(int weight, int tall) {
             this.weight = weight;
             this.tall = tall;
             this.rank = 1;
@@ -30,7 +28,6 @@ public class Back7568 {
     }
 
     public static void main(String[] args) throws IOException {
-
         int N;
         Person[] people;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -41,7 +38,7 @@ public class Back7568 {
             final String[] s = bufferedReader.readLine().split(" ");
             int weight = Integer.parseInt(s[0]);
             int tall = Integer.parseInt(s[1]);
-            Person person = new Person(i, weight, tall);
+            Person person = new Person(weight, tall);
             people[i] = person;
         }
 

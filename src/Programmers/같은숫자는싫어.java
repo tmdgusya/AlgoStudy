@@ -1,8 +1,6 @@
 package Programmers;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class 같은숫자는싫어 {
 
@@ -10,6 +8,7 @@ public class 같은숫자는싫어 {
     public static void main(String[] args) {
         int[] arr = {1,1,3,3,0,1,1};
         int[] solution = Solution.solution(arr);
+        int[] solution2 = Solution2.solution(arr);
     }
 
     static class Solution {
@@ -27,6 +26,22 @@ public class 같은숫자는싫어 {
             for(int i = 0; i < arrayList.size(); i++){
                 answer[i] = arrayList.get(i);
             }
+            return answer;
+        }
+    }
+
+    static class Solution2 {
+        public static int[] solution(int []arr) {
+            LinkedList<Integer> list = new LinkedList<Integer>();
+            list.add(arr[0]);
+            for(int i=1; i<arr.length;i++){
+                if(arr[i]!=list.getLast()){
+                    list.add(arr[i]);
+                }
+
+            }
+            Integer[] listing = list.toArray(new Integer[list.size()]);
+            int []answer = Arrays.stream(listing).mapToInt(Integer::intValue).toArray();
             return answer;
         }
     }

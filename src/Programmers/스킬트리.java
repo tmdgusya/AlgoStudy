@@ -24,7 +24,6 @@ public class 스킬트리 {
                     String oneSkill = String.valueOf(skill_clone.charAt(j));
                     if (!skill.contains(oneSkill)) {
                         skill_tree = skill_tree.replace(oneSkill, "");
-
                     }
                 }
                 if (skill.indexOf(skill_tree) == 0) {

@@ -1,10 +1,12 @@
 package Programmers;
 
+import java.util.Arrays;
+
 public class 괄호변환 {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        final String solution1 = solution.solution("()))((()");
+        final String solution1 = solution.solution("))((()");
         System.out.println("solution1 = " + solution1);
     }
 
@@ -14,31 +16,29 @@ public class 괄호변환 {
 
         public String solution(String p) {
             if(p.equals("")) return "";
-            return makeString(p);
+            return getValidateString(p);
         }
 
-        public String makeString(String p){
-
+        public String getValidateString(String p){
             int index = splitString(p);
             String u = p.substring(0, index);
+            System.out.println("u = " + u);
             String v = p.substring(index);
 
-            if(checkString(u)) sb.append(u);
+            if(validateString(u)) sb.append(u);
             else {
                 sb.append("(");
                 if(!v.equals("")){
-                   makeString(v);
+                   getValidateString(v);
                 }
                 sb.append(")");
-                sb.append(reverseString(u));
+                sb.append(setValidateGrammer(u));
             }
-            if(!v.equals("")) makeString(v);
 
             return sb.toString();
         }
 
         public int splitString(String p){
-            // 그니까 이 함수가 문자열을 균형잡이 u 와 나머지 부분인 v 로 나누는 작업을 한다.
             String[] splitString = p.split("");
             int count = 0;
             int index = 0;
@@ -54,7 +54,7 @@ public class 괄호변환 {
             return index;
         }
 
-        public boolean checkString(String p){
+        public boolean validateString(String p){
             String[] split = p.split("");
             int count = 0;
             for(String s : split){
@@ -66,7 +66,7 @@ public class 괄호변환 {
             return true;
         }
 
-        public String reverseString(String p){
+        public String setValidateGrammer(String p){
             String[] split = p.split("");
             StringBuilder sb = new StringBuilder();
             for(int i = 1; i < split.length - 1; i++){

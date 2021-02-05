@@ -6,7 +6,7 @@ public class 괄호변환 {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        final String solution1 = solution.solution("))((()");
+        final String solution1 = solution.solution("()))((()");
         System.out.println("solution1 = " + solution1);
     }
 
@@ -22,7 +22,6 @@ public class 괄호변환 {
         public String getValidateString(String p){
             int index = splitString(p);
             String u = p.substring(0, index);
-            System.out.println("u = " + u);
             String v = p.substring(index);
 
             if(validateString(u)) sb.append(u);
@@ -30,9 +29,13 @@ public class 괄호변환 {
                 sb.append("(");
                 if(!v.equals("")){
                    getValidateString(v);
+                   v = "";
                 }
                 sb.append(")");
                 sb.append(setValidateGrammer(u));
+            }
+            if(!v.equals("")){
+                getValidateString(v);
             }
 
             return sb.toString();
@@ -60,7 +63,6 @@ public class 괄호변환 {
             for(String s : split){
                 if(s.equals("(")) count++;
                 else count--;
-
                 if(count < 0) return false;
             }
             return true;
@@ -68,12 +70,12 @@ public class 괄호변환 {
 
         public String setValidateGrammer(String p){
             String[] split = p.split("");
-            StringBuilder sb = new StringBuilder();
+            StringBuilder tempString = new StringBuilder();
             for(int i = 1; i < split.length - 1; i++){
-                if(split[i].equals("(")) sb.append(")");
-                else sb.append("(");
+                if(split[i].equals("(")) tempString.append(")");
+                else tempString.append("(");
             }
-            return sb.toString();
+            return tempString.toString();
         }
     }
 }

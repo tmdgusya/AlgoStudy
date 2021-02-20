@@ -12,7 +12,7 @@ public class 소수만들기 {
         int answer = 0;
 
         public int solution(int[] nums) {
-            nCr(nums, 3, 3, 0, 0);
+            nCr(nums, nums.length, 3, 0, 0);
             return answer;
         }
 

@@ -34,4 +34,62 @@ STRAT_TIME = END_TIME - PROCESSING_TIME + 1
 
 라이브러리를 안다면 더욱 좋겠지만 모른다면 빠르게 자신이 변환해낼 수 있는 체계로서 변환해 내는것이 좋다.
 
+## Code
 
+```java
+class Solution {
+
+        public static int SECOND = 1000;
+        public static int MINUTE_TO_SECOND = 60;
+
+        public int solution(String[] lines) {
+            int answer = 0;
+            int[] startTimes = new int[lines.length];
+            int[] endTimes = new int[lines.length];
+            convertToSecond(lines, startTimes, endTimes);
+
+            answer = getAnswer(lines, answer, startTimes, endTimes);
+
+            return answer;
+        }
+
+        private int getAnswer(String[] lines, int answer, int[] startTimes, int[] endTimes) {
+            for(int i = 0; i < lines.length ; i++) {
+                int task = 0;
+                int startTime = endTimes[i];
+                int endTime = startTime + 1000;
+
+                for(int j = 0; j < lines.length ; j++) {
+                    if(startTimes[j] >= startTime && startTimes[j] < endTime) {
+                        task++;
+                    } else if(endTimes[j] >= startTime && endTimes[j] < endTime) {
+                        task++;
+                    } else if(startTimes[j] <= startTime && endTimes[j] >= endTime) {
+                        task++;
+                    }
+                }
+
+                answer = Math.max(task, answer);
+            }
+            return answer;
+        }
+
+        private void convertToSecond(String[] lines, int[] startTimes, int[] endTimes) {
+            for(int i = 0 ; i < lines.length ; i++) {
+                String[] log = lines[i].split(" ");
+                String[] responseTime = log[1].split(":");
+                int processingTime = (int) (Double.valueOf(log[2].substring(0, log[2].length() - 1)) * SECOND);
+                int startTime = 0;
+                int endTime = 0;
+
+                endTime += Integer.parseInt(responseTime[0]) * MINUTE_TO_SECOND * MINUTE_TO_SECOND * SECOND;
+                endTime += Integer.parseInt(responseTime[1]) * MINUTE_TO_SECOND * SECOND;
+                endTime += (int)(Double.parseDouble(responseTime[2]) * SECOND);
+                startTime = endTime - processingTime + 1;
+
+                startTimes[i] = startTime;
+                endTimes[i] = endTime;
+            }
+        }
+    }
+```

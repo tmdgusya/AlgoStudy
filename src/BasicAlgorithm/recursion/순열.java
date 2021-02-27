@@ -8,12 +8,14 @@ public class 순열 {
         public static void main(String[] args) {
 
             List<String> arr = new ArrayList<>();
-            arr.add("a");
-            arr.add("b");
-            arr.add("c");
+            arr.add("h");
+            arr.add("g");
+            arr.add("f");
+            arr.add("w");
+            arr.add("r");
 
             List<String> result = new ArrayList<>();
-            reculsion(arr, result, arr.size(), 2);
+            reculsion(arr, result, arr.size(), 5);
 
         }
 

@@ -1,5 +1,7 @@
 package leetCode;
 
+import java.util.ArrayList;
+
 public class DefangingAnIPAddress {
 
     public static void main(String[] args) {
@@ -10,6 +12,7 @@ public class DefangingAnIPAddress {
     static class Solution {
         public String defangIPaddr(String address) {
             String[] addrs = address.split("\\.");
+            ArrayList<Integer> list = new ArrayList<>();
             StringBuilder sb = new StringBuilder();
             for(int i = 0; i < addrs.length; i++){
                 if(i == addrs.length-1){

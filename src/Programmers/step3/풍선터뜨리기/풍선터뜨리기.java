@@ -1,7 +1,5 @@
 package Programmers.step3.풍선터뜨리기;
 
-import java.util.List;
-
 public class 풍선터뜨리기 {
 
     public static void main(String[] args) {

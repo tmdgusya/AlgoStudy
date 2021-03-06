@@ -18,8 +18,16 @@ public class 단어변환 {
 
         static Map<String, Integer> map = new LinkedHashMap<>();
 
-
         public int solution(String begin, String target, String[] words) {
+            sortWords(begin, words);
+            if(!isExistTarget(target, words)) {
+                return 0;
+            }
+            findSimilarWord(begin, target, words, duplicateWords.size());
+            return answer;
+        }
+
+        private void sortWords(String begin, String[] words) {
             for(String word : words){
                 map.put(word, getDifferentCount(begin, word));
             }
@@ -29,21 +37,16 @@ public class 단어변환 {
                 words[index] = word;
                 index++;
             }
-            if(!isExistTarget(target, words)) {
-                return 0;
-            }
-            findSimilarWord(begin, target, words, duplicateWords.size());
-            return answer;
         }
 
-        public boolean isExistTarget(String target, String[] words) {
+        private boolean isExistTarget(String target, String[] words) {
             for(int j = 0; j < words.length; j++) {
                 if(target.equals(words[j])) return true;
             }
             return false;
         }
 
-        public void findSimilarWord(String begin, String word, String[] words, int preSize) {
+        private void findSimilarWord(String begin, String word, String[] words, int preSize) {
             if(getDifferentCount(begin, word) == 1) {
                 return;
             }
@@ -64,7 +67,7 @@ public class 단어변환 {
             }
         }
 
-        public int getDifferentCount(String word, String word_) {
+        private int getDifferentCount(String word, String word_) {
             int count = 0;
             for(int i = 0; i < word.length(); i++) {
                 if(word.charAt(i) != word_.charAt(i)) {
@@ -74,7 +77,7 @@ public class 단어변환 {
             return count;
         }
 
-        public LinkedHashMap<String, Integer> sortMapByValue(Map<String, Integer> map) {
+        private LinkedHashMap<String, Integer> sortMapByValue(Map<String, Integer> map) {
             List<Map.Entry<String, Integer>> entries = new LinkedList<>(map.entrySet());
             Collections.sort(entries, (o1, o2) -> o1.getValue().compareTo(o2.getValue()));
 

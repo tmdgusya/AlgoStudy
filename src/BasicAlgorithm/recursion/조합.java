@@ -11,15 +11,12 @@ public class 조합 {
     }
 
     static void nCr(char[] str, int r, String result){
-        count++;
+        System.out.println(result);
         if(r == 0){
-            System.out.println(result);
             stringCombination.add(result);
-            return;
         }else{
-            System.out.println("count : " + count + " value : " + result);
-            for(int i = 0; i < str.length; i++){
-                nCr(str, r-1, result+str[i]);
+            for (char c : str) {
+                nCr(str, r - 1, result + c);
             }
         }
     }

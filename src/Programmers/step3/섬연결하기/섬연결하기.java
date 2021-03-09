@@ -11,59 +11,45 @@ public class 섬연결하기 {
     }
 
     static class Solution {
+
+        static int[] parents;
+
         public int solution(int n, int[][] costs) {
             int answer = 0;
+            parents = new int[n];
 
-            Arrays.sort(costs,(o1,o2)->{
-                return o1[2]-o2[2];
-            });
+            Arrays.sort(costs, (o1, o2)->{return o1[2] - o2[2];});
 
-            // 부모노드를 기억한다.
-            int[] parent = new int[n];
-
-            // 초기 값 지정.
-            for(int i=0; i<n; i++) {
-                parent[i]=i;
+            for(int i = 0; i < n; i++){
+                parents[i] = i;
             }
 
-            for( int[] cost : costs ) {
-
-                int from = cost[0];
-                int to = cost[1];
-                int value = cost[2];
-
-                // 두 정점의 부모노드가 같다면, 이미 연결이 되었으므로 보지않는다.
-                if( connectCheck(parent,from,to) ) continue;
-                else {
-                    // 그렇지 않다면, 가중치를 늘려주고 부모노드를 update해준다.
-                    answer+=value;
-                    union(parent,from,to);
-                }
+            for(int[] info : costs) {
+                int start = info[0];
+                int end = info[1];
+                int cost = info[2];
+                if(findParent(parents, start, end)) continue;
+                unionParent(parents, start, end);
+                answer += cost;
             }
+
             return answer;
         }
 
-        private static void union(int[] parent, int from, int to) {
-            from = getParent(parent,from);
-            to = getParent(parent,to);
-
-            if (from < to)
-                parent[to] = from;
-            else
-                parent[from] = to;
+        public int getParent(int[] parent, int x) {
+            if(parent[x] == x) return x;
+            return parent[x] = getParent(parent, parent[x]);
         }
 
-        private static boolean connectCheck(int[] parent, int from, int to) {
-
-            from = getParent(parent,from);
-            to = getParent(parent,to);
-
-            return from==to;
+        public void unionParent(int[] parent, int a, int b) {
+            a = getParent(parent, a);
+            b = getParent(parent, b);
+            if(a < b) parent[b] = a;
+            else parent[a] = b;
         }
 
-        private static int getParent(int[] parent, int edge) {
-            if(parent[edge]==edge) return edge;
-            return getParent(parent, parent[edge]);
+        public boolean findParent(int[] parent, int a, int b) {
+            return getParent(parent, a) == getParent(parent, b);
         }
     }
 

@@ -15,7 +15,7 @@ public class Main {
             @Override
             public void added(ObservableSet<Integer> s, Integer element) {
                 System.out.println(element + " setObserver");
-                if(element == 23) {
+                if(element == 10) {
                     s.removeObservers(this);
                 }
             }

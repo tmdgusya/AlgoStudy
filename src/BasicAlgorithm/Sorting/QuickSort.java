@@ -35,11 +35,6 @@ public class QuickSort {
                 data[pivot] = data[right];
                 data[right] = temp;
             }
-            System.out.println("x : " + left);
-            System.out.println("y : " + right);
-
-            // 정렬 전
-            printData(data, number);
 
             quick_sort(data, pivot, right - 1);
             quick_sort(data, right + 1, y);

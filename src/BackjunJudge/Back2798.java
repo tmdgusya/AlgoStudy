@@ -26,7 +26,7 @@ public class Back2798 {
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
         while(st.hasMoreTokens()) {
-            cards[index_] = Integer.valueOf(st.nextToken());
+            cards[index_] = Integer.parseInt(st.nextToken());
             index_++;
         }
 
